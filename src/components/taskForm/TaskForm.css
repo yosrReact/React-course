@@ -1,0 +1,16 @@
+.task-form {
+    margin: 10px;
+}
+
+.task-form input {
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.task-form button {
+    color: white;
+    background-color: #007eff;
+    margin-right: 10px;
+    border: none;
+    padding: 6px;
+}
