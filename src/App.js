@@ -29,6 +29,11 @@ function App() {
   const addTask=(title, duration)=>{
     setTasks([...tasks, { title, duration }])
   }
+
+   const updateTask = (id, title, duration) => {
+     const newTasks = tasks.map(task => task.id === id?({title, duration}): task)
+     setTasks(newTasks)
+   }
   //to use after to explain callback and memo
   // const memoizedCallback = useCallback(addTask, [])
 
@@ -42,7 +47,7 @@ function App() {
       {!loading && (
         <div>
           <TaskForm addTask={addTask} />
-          {<TasksList tasks={tasks} deleteTask={deleteTask} />}
+          {<TasksList tasks={tasks} deleteTask={deleteTask} updateTask ={updateTask} />}
         </div>
       )}
     </div>
