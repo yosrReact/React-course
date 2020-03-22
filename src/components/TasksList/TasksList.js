@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Task from '../task/Task';
 import './TasksList.css'
-export default function TasksList({tasks, deleteTask}) {
+export default function TasksList({tasks, deleteTask, updateTask}) {
 
   const [isVisible, setIsVisible]=useState(true)
   
@@ -24,6 +24,7 @@ export default function TasksList({tasks, deleteTask}) {
                 duration={task.duration}
                 details={task.details}
                 deleteTask={deleteTask}
+                updateTask={updateTask}
               >
                 {task.description}
                 <div>Hello</div>

@@ -26,3 +26,16 @@
 .customTask {
     color: red
 }
+
+.task input {
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.task button {
+    color: white;
+    background-color: #007eff;
+    margin-right: 10px;
+    border: none;
+    padding: 6px;
+}
