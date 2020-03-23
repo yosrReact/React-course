@@ -9,12 +9,13 @@ export default function Task({
   updateTask
 }) {
   const [updateMode, setUpdateMode] = useState(false)
-    const [titleToUpdate, setTitleToUpdate] = useState(title)
-    const [durationToUpdate, setDurationToUpdate] = useState(duration)
-     const handleUpdateTask = () => {
+  const [titleToUpdate, setTitleToUpdate] = useState(title)
+  const [durationToUpdate, setDurationToUpdate] = useState(duration)
+  
+  const handleUpdateTask = () => {
        updateTask(id, titleToUpdate, durationToUpdate)
        setUpdateMode(false)
-     }
+  }
   return (
     <div className="task">
       {!updateMode ? (
