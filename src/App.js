@@ -2,9 +2,9 @@ import React, { useState, useCallback } from "react"
 import './App.css';
 import TaskForm from './components/taskForm';
 import TasksList from './components/TasksList/TasksList';
+import Hello from './components/hello/Hello'
 
 function App() {
-  const steps = ["Enter the task title", "click on add task"]
   let loading=false
 
   const [tasks, setTasks] = useState([
@@ -25,9 +25,15 @@ function App() {
     }
   ])
 
-  
+  const [isVisible, setIsVisible]=useState(true)
+
+
+
   const addTask=(title, duration)=>{
-    setTasks([...tasks, { title, duration }])
+    setTasks(previousTasks => [
+      ...previousTasks,
+      { id: tasks.length + 1, title, duration: Number(duration) }
+    ])
   }
 
    const updateTask = (id, title, duration) => {
@@ -35,19 +41,32 @@ function App() {
      setTasks(newTasks)
    }
   //to use after to explain callback and memo
-  // const memoizedCallback = useCallback(addTask, [])
+  const memoizedCallback = useCallback(addTask, [])
 
    const deleteTask = (id) => {
      const newTasks=tasks.filter(task=>task.id!==id)
      setTasks(newTasks)
    }
+ const toggleVisibility = () => {
+   setIsVisible(!isVisible)
+ }
   return (
     <div className="app">
+      <div className="toggle">
+        <button onClick={toggleVisibility}>Toggle visibility</button>
+      </div>
       {loading && <div>Loading ... </div>}
       {!loading && (
         <div>
-          <TaskForm addTask={addTask} />
-          {<TasksList tasks={tasks} deleteTask={deleteTask} updateTask ={updateTask} />}
+          <TaskForm addTask={memoizedCallback} />
+
+           {isVisible && <TasksList
+            tasks={tasks}
+            deleteTask={deleteTask}
+            updateTask={updateTask}
+            
+          />}
+          <Hello value="hello" />
         </div>
       )}
     </div>
