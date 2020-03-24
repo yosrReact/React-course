@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import "./Task.css"
 export default function Task({
@@ -11,7 +11,9 @@ export default function Task({
   const [updateMode, setUpdateMode] = useState(false)
   const [titleToUpdate, setTitleToUpdate] = useState(title)
   const [durationToUpdate, setDurationToUpdate] = useState(duration)
+
   
+
   const handleUpdateTask = () => {
        updateTask(id, titleToUpdate, durationToUpdate)
        setUpdateMode(false)

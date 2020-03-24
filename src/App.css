@@ -6,6 +6,24 @@
   padding: 10px;
 }
 
+.app .toggle, .app .search {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.app .toggle button {
+  color: #007eff;
+  border: 1px solid #007eff;
+  background-color: white;
+  margin-right: 10px;
+  padding: 6px;
+
+}
+
+.app input {
+  padding: 5px;
+}
+
 body {
   background-color: #ffa50059
 }
