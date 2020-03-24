@@ -1,4 +1,4 @@
-import React, { useState, useRef , memo} from "react"
+import React, { useState, useRef, memo, useEffect } from "react"
 import './TaskForm.css'
 function TaskForm({ addTask }) {
   const [title, setTitle] = useState("learn")
@@ -11,8 +11,16 @@ function TaskForm({ addTask }) {
     setTitle("learn")
     setDuration(0)
   }
+  useEffect(() => {
+    // console.log("hello")
+    document.title = title
+    // setTitle("hello"+ Math.random())
+  })
+
+  // useEffect(() => {})
+
   const handleTitle = e => setTitle(e.target.value)
-   console.log("I'm in task form")
+  //  console.log("I'm in task form")
   return (
     <div className="task-form">
       <input
