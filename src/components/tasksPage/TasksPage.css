@@ -1,0 +1,18 @@
+.tasks-page .toggle,
+.tasks-page .search {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.tasks-page .toggle button {
+    color: #007eff;
+    border: 1px solid #007eff;
+    background-color: white;
+    margin-right: 10px;
+    padding: 6px;
+
+}
+
+.tasks-page input {
+    padding: 5px;
+}

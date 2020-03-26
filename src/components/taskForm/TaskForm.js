@@ -12,12 +12,10 @@ function TaskForm({ addTask }) {
     setDuration(0)
   }
   useEffect(() => {
-    // console.log("hello")
     document.title = title
     // setTitle("hello"+ Math.random())
   })
 
-  // useEffect(() => {})
 
   const handleTitle = e => setTitle(e.target.value)
   //  console.log("I'm in task form")
