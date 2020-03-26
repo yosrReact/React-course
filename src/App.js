@@ -3,7 +3,12 @@ import "./App.css"
 import TasksPage from "./components/tasksPage/TasksPage"
 import Hello from  "./components/hello/Hello"
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom"
 import TaskDetails from './components/taskDetails/TaskDetails';
 function App() {
   return (
@@ -17,15 +22,21 @@ function App() {
           of them to render at a time
         */}
         <Switch>
+          <Route exact path="/">
+            <Redirect to="/hello" />
+          </Route>
           <Route exact path="/hello">
             <Hello value="Welcome to my web site" />
           </Route>
+
           <Route exact path="/tasks">
             <TasksPage />
           </Route>
-          <Route path="/tasks/:taskId">
+
+          <Route exact path="/tasks/:taskId">
             <TaskDetails />
           </Route>
+
           <Route path="/">
             <Hello value="Welcome to my web site" />
           </Route>
