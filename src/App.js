@@ -10,35 +10,19 @@ import {
   Redirect
 } from "react-router-dom"
 import TaskDetails from './components/taskDetails/TaskDetails';
+import TeacherRoutes from "./components/teacherRoutes/TeacherRoutes"
+import StudentRoutes from "./components/studentRoutes/StudentRoutes"
 function App() {
   return (
     <div className="app">
+      Hello
       <Router>
-        {/*
-          A <Switch> looks through all its children <Route>
-          elements and renders the first one whose path
-          matches the current URL. Use a <Switch> any time
-          you have multiple routes, but you want only one
-          of them to render at a time
-        */}
         <Switch>
-          <Route exact path="/">
-            <Redirect to="/hello" />
+          <Route path="/teacher">
+            <TeacherRoutes />
           </Route>
-          <Route exact path="/hello">
-            <Hello value="Welcome to my web site" />
-          </Route>
-
-          <Route exact path="/tasks">
-            <TasksPage />
-          </Route>
-
-          <Route exact path="/tasks/:taskId">
-            <TaskDetails />
-          </Route>
-
-          <Route path="/">
-            <Hello value="Welcome to my web site" />
+          <Route path="/student">
+            <StudentRoutes />
           </Route>
         </Switch>
       </Router>

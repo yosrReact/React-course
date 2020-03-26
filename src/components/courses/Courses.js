@@ -1,9 +1,9 @@
 import React, { memo } from "react"
 import Menu from "../menu/Menu"
 
-import "./Hello.css"
+import "./Courses.css"
 
-function Hello({ value }) {
+function Courses({ value }) {
   return (
     <div className="hello">
       {/* <Menu /> */}
@@ -11,4 +11,4 @@ function Hello({ value }) {
     </div>
   )
 }
-export default memo(Hello)
+export default memo(Courses)

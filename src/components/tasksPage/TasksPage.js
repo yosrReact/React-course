@@ -92,7 +92,7 @@ function TasksPage() {
 
   return (
     <div className="tasks-page">
-      <Menu />
+      {/* <Menu /> */}
       {/* <Link to="/about" >Hello </Link> */}
       <div className="toggle">
         <button onClick={toggleVisibility}>Toggle visibility</button>
