@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react"
 import { fetchTaskById } from "../../services/tasks.service"
-import { useParams } from "react-router-dom"
+import { useParams, useLocation } from "react-router-dom"
 import './TaskDetails.css'
 function TaskDetails() {
   const [loading, setLoading] = useState(false)
   const [task, setTask] = useState({})
+ 
+ 
   const { taskId } = useParams()
+  console.log('useParams(): ', useParams());
+  console.log('useLocation(): ', useLocation());
 
   useEffect(() => {
     const fetchData = async () => {

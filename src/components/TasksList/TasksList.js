@@ -1,13 +1,27 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link } from 'react-router-dom'
+import { useHistory /*, Redirect*/ } from "react-router-dom"
+
 import Task from "../task/Task"
 import "./TasksList.css"
 export default function TasksList({ tasks, deleteTask, updateTask }) {
+  const { push } = useHistory()
+  // use it if you will use Redirect
+  // const [taskId, setTaskId]=useState('')
+ 
+  console.log(' useHistory(): ',  useHistory());
+  const handleClick=(taskId)=>{
+    //setTaskId(taskId)
+    // or 
+    // push(`/tasks/${taskId}`)
+  }
   return (
     <div className="tasks-list">
+      {/* {taskId!=="" && <Redirect to={`/tasks/${taskId}`} />} */}
       <div>
         {tasks.map(task => (
           <Link to={`/tasks/${task.id}`}>
+          {/* <div onClick={() => handleClick(task.id)}> */}
             <Task
               key={task.id}
               id={task.id}
@@ -16,6 +30,7 @@ export default function TasksList({ tasks, deleteTask, updateTask }) {
               deleteTask={deleteTask}
               updateTask={updateTask}
             />
+          {/* </div> */}
           </Link>
         ))}
       </div>

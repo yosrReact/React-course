@@ -5,17 +5,13 @@ function Menu() {
   return (
     <ul>
       <li>
-        <NavLink
-          to="/hello"
-          activeClassName="active"
-          isActive={(_, { pathname }) =>
-            pathname.match("/hello") ||
-            pathname==="/"
+        <NavLink to="/hello" activeClassName="active"
+        isActive={(_, { pathname }) =>
+            pathname.match("/hello") || pathname === "/"
           }
         >
           Home
-        </NavLink>
-
+        </NavLink>{" "}
         {/* <Link to="/hello">Home</Link> */}
       </li>
       <li>
@@ -27,4 +23,25 @@ function Menu() {
     </ul>
   )
 }
+        {
+          /* <NavLink to="/tasks" activeClassName="active">
+          My tasks
+        </NavLink> */
+        }
+        {
+
+          //  isActive={(_, { pathname }) =>
+          //   pathname.match("/hello") || pathname === "/"
+          // }
+          /* <NavLink
+          to="/hello"
+          activeClassName="active"
+          isActive={(_, { pathname }) =>
+            pathname.match("/hello") ||
+            pathname==="/"
+          }
+        >
+          Home
+        </NavLink> */
+        }
 export default Menu
