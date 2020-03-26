@@ -1,0 +1,15 @@
+.task-details .header {
+    font-weight: bold;
+    font-size: 23px;
+    margin-bottom:20px;
+}
+
+.task-details .title {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.task-details .value {
+    font-size: 14px;
+    margin-bottom: 10px;
+}

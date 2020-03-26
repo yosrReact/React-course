@@ -1,8 +1,14 @@
-import React ,{memo} from "react"
-import './Hello.css'
+import React, { memo } from "react"
+import Menu from "../menu/Menu"
 
-function Hello({value}){
-    console.log("I'm executing Hello function/component")
-    return <div>{value}</div>
+import "./Hello.css"
+
+function Hello({ value }) {
+  return (
+    <div className="hello">
+      <Menu />
+      <div>{value}</div>
+    </div>
+  )
 }
 export default memo(Hello)
