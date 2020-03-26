@@ -31,12 +31,12 @@ function delay(ms) {
 }
 
 export const fetchTaskById=async(taskId)=>{
-  await delay(2000)
+  await delay(500)
   return tasks.find(task => task.id===taskId)
 }
 
 export const fetchTasks = async searchValue => {
-  await delay(2000)
+  await delay(500)
   // return tasks
   return tasks.filter(task => task.title.includes(searchValue))
 }

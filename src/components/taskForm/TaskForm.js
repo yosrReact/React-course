@@ -18,7 +18,6 @@ function TaskForm({ addTask }) {
 
 
   const handleTitle = e => setTitle(e.target.value)
-  //  console.log("I'm in task form")
   return (
     <div className="task-form">
       <input

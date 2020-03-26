@@ -5,7 +5,7 @@ function Menu() {
   return (
     <ul>
       <li>
-        <NavLink to="/hello" activeClassName="active"
+        <NavLink to="/teacher/hello" activeClassName="active"
         isActive={(_, { pathname }) =>
             pathname.match("/hello") || pathname === "/"
           }
@@ -15,7 +15,7 @@ function Menu() {
         {/* <Link to="/hello">Home</Link> */}
       </li>
       <li>
-        <NavLink to="/tasks" activeClassName="active">
+        <NavLink to="/teacher/tasks" activeClassName="active">
           My tasks
         </NavLink>
         {/* <Link to="/tasks"> My tasks</Link> */}
