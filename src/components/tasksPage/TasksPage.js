@@ -4,6 +4,7 @@ import TaskForm from "../taskForm/TaskForm"
 import Menu from '../menu/Menu'
 import TasksList from "../TasksList/TasksList"
 import { fetchTasks } from "../../services/tasks.service"
+import { postTask } from './../../services/tasks.service';
 function TasksPage() {
   const [tasks, setTasks] = useState([])
   const [loading, setLoading] = useState(false)
@@ -11,17 +12,17 @@ function TasksPage() {
 
   const [isVisible, setIsVisible] = useState(true)
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setLoading(true)
-  //     const result = await fetchTasks()
-  //     setTasks(result)
-  //     setLoading(false)
-  //   }
-  //   console.log("useEffect")
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true)
+      const result = await fetchTasks()
+      setTasks(result)
+      setLoading(false)
+    }
+    console.log("useEffect")
 
-  //   fetchData()
-  // }, [])
+    fetchData()
+  }, [])
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -41,31 +42,37 @@ function TasksPage() {
   //   fetchData()
   // }, [searchValue])
 
-  useEffect(() => {
-    let didCancel = false
-    const fetchData = async () => {
-      setLoading(true)
-      if (!searchValue) {
-        setTasks([])
-        setLoading(false)
-      } else {
-        const result = await fetchTasks(searchValue)
-        console.log("result: ", didCancel)
-        if (!didCancel) {
-          setTasks(result)
-          setLoading(false)
-        }
-      }
-    }
-    fetchData()
+  // useEffect(() => {
+  //   let didCancel = false
+  //   const fetchData = async () => {
+  //     setLoading(true)
+  //     if (!searchValue) {
+  //       setTasks([])
+  //       setLoading(false)
+  //     } else {
+  //       const result = await fetchTasks(searchValue)
+  //       console.log("result: ", didCancel)
+  //       if (!didCancel) {
+  //         setTasks(result)
+  //         setLoading(false)
+  //       }
+  //     }
+  //   }
+  //   fetchData()
 
-    return () => {
-      console.log("cleanup: ", searchValue)
-      didCancel = true
-    }
-  }, [searchValue])
+  //   return () => {
+  //     console.log("cleanup: ", searchValue)
+  //     didCancel = true
+  //   }
+  // }, [searchValue])
 
   const addTask = (title, duration) => {
+    postTask({id: 5,
+title: "new task",
+duration: "1h",
+type: "new",
+date: "2020-03-26T19:39:23.497+0000",
+description: "my first task"})
     setTasks(previousTasks => [
       ...previousTasks,
       { id: previousTasks.length + 1, title, duration: Number(duration) }

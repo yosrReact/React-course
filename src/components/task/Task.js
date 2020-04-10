@@ -24,7 +24,7 @@ export default function Task({
         <>
           <div>
             <div className="title">
-              {title} ({duration} mn)
+              {title} ({duration})
             </div>
           </div>
           <div className="actions">

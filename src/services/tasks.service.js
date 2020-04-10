@@ -1,3 +1,5 @@
+import Axios from 'axios'
+
 const tasks = [
   {
     id: "1",
@@ -30,13 +32,29 @@ function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-export const fetchTaskById=async(taskId)=>{
-  await delay(500)
-  return tasks.find(task => task.id===taskId)
+export const postTask = async task => {
+  const result = await Axios.post(
+    "https://heroku-boot-todoapp-seif.herokuapp.com/tasks/" ,task
+  )
+  console.log("result: ", result)
+  // return result.data
 }
 
-export const fetchTasks = async searchValue => {
-  await delay(500)
+export const fetchTaskById=async(taskId)=>{
+   const result = await Axios.get(
+     "https://heroku-boot-todoapp-seif.herokuapp.com/tasks/" + taskId
+   )
+   console.log('result: ', result);
+   return result.data
+}
+
+export const fetchTasks = async () => {
+  // await delay(500)
+  const result = await Axios.get(
+    "https://heroku-boot-todoapp-seif.herokuapp.com/tasks/", 
+  )
+    // console.log('result: ', result);
+    return result.data._embedded.tasks
   // return tasks
-  return tasks.filter(task => task.title.includes(searchValue))
+  // return tasks.filter(task => task.title.includes(searchValue))
 }
