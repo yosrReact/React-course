@@ -1,27 +1,35 @@
 import React, { useState, useCallback, useEffect } from "react"
 import "./TasksPage.css"
 import TaskForm from "../taskForm/TaskForm"
-import Menu from '../menu/Menu'
+import Menu from "../menu/Menu"
 import TasksList from "../TasksList/TasksList"
-import { fetchTasks } from "../../services/tasks.service"
+// import {  } from "../../services/tasks.service"
+import {fetchTasks,  postTask, updateTask as updateTaskFromApi, deleteTask as deleteTaskFromApi } from "./../../services/tasks.service"
 function TasksPage() {
   const [tasks, setTasks] = useState([])
   const [loading, setLoading] = useState(false)
   const [searchValue, setSearchValue] = useState("")
 
   const [isVisible, setIsVisible] = useState(true)
+  const [error, setError]=useState("")
+  useEffect(() => {
+    const fetchData = async () => {
+      try{
+      setLoading(true)
+     
+      const result = await fetchTasks()
+      setTasks(result)
+      setLoading(false)
+      }
+      catch(e){
+        setLoading(false)
+        setError("An error occurred when we tried to fetch tasks")
+      }
+    }
+    console.log("useEffect")
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setLoading(true)
-  //     const result = await fetchTasks()
-  //     setTasks(result)
-  //     setLoading(false)
-  //   }
-  //   console.log("useEffect")
-
-  //   fetchData()
-  // }, [])
+    fetchData()
+  }, [])
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -41,54 +49,66 @@ function TasksPage() {
   //   fetchData()
   // }, [searchValue])
 
-  useEffect(() => {
-    let didCancel = false
-    const fetchData = async () => {
-      setLoading(true)
-      if (!searchValue) {
-        setTasks([])
-        setLoading(false)
-      } else {
-        const result = await fetchTasks(searchValue)
-        console.log("result: ", didCancel)
-        if (!didCancel) {
-          setTasks(result)
-          setLoading(false)
-        }
-      }
-    }
-    fetchData()
+  // useEffect(() => {
+  //   let didCancel = false
+  //   const fetchData = async () => {
+  //     setLoading(true)
+  //     if (!searchValue) {
+  //       setTasks([])
+  //       setLoading(false)
+  //     } else {
+  //       const result = await fetchTasks(searchValue)
+  //       console.log("result: ", didCancel)
+  //       if (!didCancel) {
+  //         setTasks(result)
+  //         setLoading(false)
+  //       }
+  //     }
+  //   }
+  //   fetchData()
 
-    return () => {
-      console.log("cleanup: ", searchValue)
-      didCancel = true
-    }
-  }, [searchValue])
+  //   return () => {
+  //     console.log("cleanup: ", searchValue)
+  //     didCancel = true
+  //   }
+  // }, [searchValue])
 
-  const addTask = (title, duration) => {
-    setTasks(previousTasks => [
-      ...previousTasks,
-      { id: previousTasks.length + 1, title, duration: Number(duration) }
-    ])
+  const addTask = async (title, duration) => {
+    const newTask = await postTask({
+      title,
+      duration,
+      type: "new",
+      date: "2020-03-26T19:39:23.497+0000",
+      description: "my first task",
+    })
+    setTasks((previousTasks) => [...previousTasks, { ...newTask }])
   }
 
-  const updateTask = (id, title, duration) => {
-    const newTasks = tasks.map(task =>
+  const updateTask = async (id, title, duration) => {
+    await updateTaskFromApi(id, {
+      title,
+      duration,
+      type: "new",
+      date: "2020-03-26T19:39:23.497+0000",
+      description: "my first task",
+    })
+    const newTasks = tasks.map((task) =>
       task.id === id ? { title, duration } : task
     )
     setTasks(newTasks)
   }
   const memoizedCallback = useCallback(addTask, [])
 
-  const deleteTask = id => {
-    const newTasks = tasks.filter(task => task.id !== id)
+  const deleteTask = async (id) => {
+    await deleteTaskFromApi(id)
+    const newTasks = tasks.filter((task) => task.id !== id)
     setTasks(newTasks)
   }
   const toggleVisibility = () => {
     setIsVisible(!isVisible)
   }
   // montrer useLocation, useHistory
-// montrer nested routes : faire un lien vers chaque task 
+  // montrer nested routes : faire un lien vers chaque task
 
   return (
     <div className="tasks-page">
@@ -106,19 +126,22 @@ function TasksPage() {
             name="search"
             placeholder="search task by name"
             value={searchValue}
-            onChange={e => setSearchValue(e.target.value)}
+            onChange={(e) => setSearchValue(e.target.value)}
           />
         </div>
         {loading ? (
           <div>Loading ... </div>
         ) : (
-          isVisible && (
+          <>
+          {isVisible && (
             <TasksList
               tasks={tasks}
               deleteTask={deleteTask}
               updateTask={updateTask}
             />
-          )
+          )}
+          {error.length!==0 && (<div>{error}</div>)}
+          </>
         )}
       </div>
     </div>

@@ -28,7 +28,7 @@ function TaskForm({ addTask }) {
         onChange={handleTitle}
       />
       <input
-        type="number"
+        type="text"
         value={duration}
         name="duration"
         onChange={e => setDuration(e.target.value)}
